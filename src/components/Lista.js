@@ -1,53 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAxios } from "../hooks/useAxios";
 
 const Lista = () => {
-
-    const [data, setData] = useState([]);
-    const [error, setError] = useState({
-        isError: false,
-        message: '',
-    });
-    const [isLoading, setIsLoading] = useState(false);
-
-    const [worldCupData, setWorldCupData] = useState([]);
-    const [worldCupError, setWorldCupError] = useState({
-        isError: false,
-        message: '',
-    });
-    const [isWorldCupLoading, setIsWorldCupLoading] = useState(false);
-
     const [botonActualizador, setBotonActualizador] = useState(false);
 
-    useEffect(() => {
-        setIsWorldCupLoading(true);
-        axios('http://localhost:8000/team')
-            .then(res => setWorldCupData(res.data))
-            .catch(err => setWorldCupError({
-                isError: true,
-                message: err.message,
-            }))
-            .finally(() => {
-                setTimeout(() => {
-                    setIsWorldCupLoading(false)
-                }, 1000)
-            })
-    }, [botonActualizador])
-
-    useEffect(() => {
-        setIsLoading(true);
-        axios('https://jsonplaceholder.typicode.com/users')
-            .then(res => setData(res.data))
-            .catch(err => setError({
-                isError: true,
-                message: err.message,
-            }))
-            .finally(() => {
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 1000)
-            })
-    }, [botonActualizador])
+    const { data, error, isLoading } =
+        useAxios([botonActualizador], 'https://jsonplaceholder.typicode.com/users');
+    const { data: worldCupData, error: worldCupError, isLoading: isWorldCupLoading } =
+        useAxios([botonActualizador], 'http://localhost:8000/team');
 
     return (
         <>
@@ -78,8 +39,8 @@ const Lista = () => {
                         isWorldCupLoading ? <h4>Cargando....</h4> :
 
                             worldCupData.length !== 0 &&
-      
-                            worldCupData.matches.map(({ match, date, day, time, rival, stadium, img}) => (
+
+                            worldCupData.matches.map(({ match, date, day, time, rival, stadium, img }) => (
                                 <li key={match}>
                                     <div style={{
                                         maxWidth: '200px',
@@ -88,7 +49,7 @@ const Lista = () => {
 
                                     }}>
                                         <h2>{rival}</h2>
-                                        <img src={img} alt={rival} style={{ maxWidth: '100%'}}/>
+                                        <img src={img} alt={rival} style={{ maxWidth: '100%' }} />
                                         <div style={{
                                             display: 'flex',
                                             gap: '1rem',
