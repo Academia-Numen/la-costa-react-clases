@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAxios } from "../../hooks/useAxios";
 import Card from "../Card";
+import { CardsContainer } from "./lista.styled";
+import React from 'react';
 
 const selectData = [
     { value: 'Arabia Saudita', label: 'Arabia Saudita' },
@@ -45,11 +47,7 @@ const Lista = () => {
 
             <h3>Partidos de la Fase de Grupos</h3>
 
-            <ul style={{
-                display: 'flex',
-                gap: '1rem',
-                listStyle: 'none',
-            }}>
+            <CardsContainer>
                 {
                     worldCupError.isError ? <h4 style={{ color: 'red' }}>Error: {worldCupError.message}</h4> :
 
@@ -71,7 +69,7 @@ const Lista = () => {
                                 />
                             ))
                 }
-            </ul>
+            </CardsContainer>
         </>
     );
 }

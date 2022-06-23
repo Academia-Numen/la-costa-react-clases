@@ -1,4 +1,5 @@
 import { CardContainer, Image, Text, TimeContainer } from "./card.styled";
+import React from 'react';
 
 export default function Card(props) {
     const { date, day, time, rival, stadium, img, option } = props;
