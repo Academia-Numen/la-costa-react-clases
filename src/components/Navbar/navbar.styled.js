@@ -1,9 +1,15 @@
 import styled from "@emotion/styled";
 
-export const CardContainer = styled.li`
-    max-width: 200px;
-    background: ${({ option, rival }) => option === rival ? 'yellow' : 'skyblue'};
-    padding: 10px;
+export const NavbarContainer = styled.nav`
+    ${({ themeStyles }) => themeStyles}; 
+    padding: 5px;
+    ul {
+        padding: 0;
+    }
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
 `;
 
 export const TimeContainer = styled.div`
