@@ -1,11 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
-import { BooksContext, ThemeContext } from '../../App';
+import { BooksContext } from '../../contexts/BooksContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { BooksContainer, BooksUnorderedList, BookItem } from './book-list.styled';
 
 const BooksList = () => {
    const books = useContext(BooksContext);
-   const themeStyles = useContext(ThemeContext);
+   const { themeStyles } = useContext(ThemeContext);
 
     return (
         <BooksContainer themeStyles={themeStyles}>
