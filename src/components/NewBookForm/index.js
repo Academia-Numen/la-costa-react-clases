@@ -2,16 +2,21 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { BooksContext } from '../../contexts/BooksContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import { ACTIONS } from '../../reducers/bookReducer';
 import { FormContainer, InputField } from './new-book-form.styled';
 
 const NewBookForm = () => {
-    const books = useContext(BooksContext);
+    const { dispatch } = useContext(BooksContext);
     const { themeStyles } = useContext(ThemeContext);
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newBook = { author: author, title: title, id: new Date };
+        dispatch({ type: ACTIONS.ADD_BOOK, payload: newBook});
+        setTitle('');
+        setAuthor('');
     }
 
     return (
@@ -29,7 +34,7 @@ const NewBookForm = () => {
             <InputField 
                 type="text" 
                 value={author} 
-                placeholder="book title"
+                placeholder="book author"
                 required
                 onChange={e => setAuthor(e.target.value)}
             />

@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar';
 import BooksList from './components/BooksList';
